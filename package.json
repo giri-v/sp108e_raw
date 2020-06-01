@@ -1,8 +1,8 @@
 {
-  "name": "sp108e",
+  "name": "sp108e_raw",
   "version": "0.0.5",
   "description": "This node library will send commands to the sp108e LED library. It also contains a simple RESTful node service to control LEDs using this controller.",
-  "main": "sp108e",
+  "main": "sp108e_raw",
   "scripts": {
     "example": "node examples/example.js",
     "server": "node examples/server.js",
@@ -13,7 +13,7 @@
     "led controller",
     "npm"
   ],
-  "author": "George Burrows",
+  "author": "Giri Venkat",
   "license": "ISC",
   "dependencies": {
     "english2number": "^1.0.8",
