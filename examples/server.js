@@ -19,7 +19,7 @@
  * NOTE: Update the ip address for your own device
  */
 const express = require("express");
-const { sp108e } = require("../sp108e_raw");
+const { sp108e, COLOR_MAP } = require("../sp108e_raw");
 const fs = require("fs");
 const path = require("path");
 
@@ -84,28 +84,12 @@ runNaturalLanguageCommand = async (p, cmd) => {
   console.log("Running natural language command:", cmd);
   if (cmd[0] === "color" || cmd[0] === "colour") {
     const colorname = cmd.slice(1).join("").toLowerCase();
-    const hex = COLOR_MAP[colorname];
-    if (hex) {
-      console.log("Setting color", colorname, hex);
-      return await p.setColor(hex);
-    }
-
-    const colorAnimation = ANIMATION_MAP[colorname];
-    if (colorAnimation) {
-      console.log("Setting color", colorname, hex);
-      return await p.setDreamMode(colorAnimation);
-    }
-
-    if (colorname.length === 6) {
-      console.log("Setting color", colorname, hex);
+    //const hex = COLOR_MAP[colorname];
+    if (colorname) {
+      console.log("Setting color", colorname);
       return await p.setColor(colorname);
     }
 
-    try {
-      const patternNumber =
-        parseInt(cmd[1]) || p.getNaturalLanguageNumber(colorname);
-      return await p.setDreamMode(patternNumber);
-    } catch (err) { }
 
     console.log("Unable to find color", colorname);
   }
