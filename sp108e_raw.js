@@ -93,6 +93,7 @@ class sp108e {
     if (!options.colorOrder)
       options.colorOrder = COLOR_ORDERS.GBR;
 
+    
 
   }
 
