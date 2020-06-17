@@ -30,6 +30,8 @@ const CMD_SET_COLOR_ORDER = "3C"; // Param: 1-180
 const CMD_SET_NAME_MODE = "14"; // Param: 1-180
 const CMD_SET_TOTAL_SEGMENTS = "2e"; // Param: 1-180
 const CMD_SET_LEDS_PER_SEGMENT = "2d"; // Param: 1-180
+const CMD_SET_WHITE_BRIGHTNESS = "08"; // Param: 1-255
+
 
 const NO_PARAMETER = "000000";
 
@@ -93,7 +95,7 @@ class sp108e {
     if (!options.colorOrder)
       options.colorOrder = COLOR_ORDERS.GBR;
 
-    
+
 
   }
 
@@ -147,13 +149,6 @@ class sp108e {
   };
 
   /**
-   * Toggles the led lights off
-   */
-  toggleOnOff = async () => {
-    return await this.send(CMD_TOGGLE, NO_PARAMETER, 17);
-  };
-
-  /**
    * Gets the status of the sp108e, on/off, color, etc
    */
   getStatus = async () => {
@@ -200,6 +195,14 @@ class sp108e {
    */
   setBrightness = async (brightness) => {
     return await this.send(CMD_SET_BRIGHTNESS, this.intToHex(brightness), 0);
+  };
+
+  /**
+   * Sets the white brightness of the leds
+   * @param {integer} whitebrightness any integer from 0-255
+   */
+  setWhiteBrightness = async (whitebrightness) => {
+    return await this.send(CMD_SET_WHITE_BRIGHTNESS, this.intToHex(whitebrightness), 0);
   };
 
   /**
@@ -287,6 +290,7 @@ class sp108e {
 
     let response = undefined;
     if (responseLength > 0) {
+      console.log("Awaiting response...");
       response = await client.read(responseLength);
       console.log("rx", response.toString("hex"));
     }

@@ -6,14 +6,13 @@
 const { sp108e, ANIM_MODE_FLOW, ANIM_MODE_STATIC } = require("../sp108e_raw");
 
 const sp108e_options = {
-  host: "192.168.5.115",
+  host: "192.168.5.114",
   port: 8189,
 };
 
 const test = async () => {
   const p = new sp108e(sp108e_options);
-
-  await p.getStatus();
+  //await p.getStatus();
 
   if (p.status.result == "OK") {
     await p.toggleOnOff();
